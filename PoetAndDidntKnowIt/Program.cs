@@ -30,14 +30,11 @@ namespace PoetAndDidntKnowIt
             Console.WriteLine("Padding : " + padLength + " (" + requests + " requests)");
 
             var res = new byte[blocks - 1][];
-            Parallel.For<int>(1, blocks,
-                () => 0,
-                (ixx, loop, k) =>
+            Parallel.For(1, blocks,
+                (i) =>
                 {
-                    res[ixx - 1] = DecryptBlock(enc, ixx, padLength);
-                    return k;
-                },
-                x => { });
+                    res[i - 1] = DecryptBlock(enc, i, padLength);
+                });
 
             var result = res.SelectMany(x => x).ToList();
             result = result.TakeWhile((b, ix) => ix < (result.Count - padLength)).ToList();
@@ -48,7 +45,6 @@ namespace PoetAndDidntKnowIt
 
             Console.ReadKey();
         }
-
 
         public static bool IsPaddingValid(byte[] iv, byte[] byteArray)
         {
@@ -62,8 +58,8 @@ namespace PoetAndDidntKnowIt
             {
                 return false;
             }
-
         }
+
         private static int FindPaddingLength(byte[] iv, byte[] dec, int i, int j)
         {
             if (i == j) return i;
@@ -76,6 +72,7 @@ namespace PoetAndDidntKnowIt
             }
             return FindPaddingLength(iv, dec, m - 1, j);
         }
+
         private static byte[] DecryptBlock(byte[] encrypted, int blockNum, int padLength)
         {
             var block = encrypted.GetBlock(blockNum, BlockSize);
@@ -107,8 +104,8 @@ namespace PoetAndDidntKnowIt
             }
             return result;
         }
-
     }
+
     public static class ByteHelper
     {
         public static byte[] GetBlock(this byte[] bytes, int num, int blockSize)
