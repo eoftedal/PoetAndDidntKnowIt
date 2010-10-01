@@ -30,11 +30,9 @@ namespace PoetAndDidntKnowIt
             Console.WriteLine("Padding : " + padLength + " (" + requests + " requests)");
 
             var res = new byte[blocks - 1][];
-            Parallel.For(1, blocks,
-                (i) =>
-                {
-                    res[i - 1] = DecryptBlock(enc, i, padLength);
-                });
+            Parallel.For(1, blocks, 
+                i => res[i - 1] = DecryptBlock(enc, i, padLength)
+                );
 
             var result = res.SelectMany(x => x).ToList();
             result = result.TakeWhile((b, ix) => ix < (result.Count - padLength)).ToList();
