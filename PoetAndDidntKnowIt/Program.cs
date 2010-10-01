@@ -13,6 +13,8 @@ namespace PoetAndDidntKnowIt
     {
         static int requests = 0;
         public const int BlockSize = 16;
+        
+        //private static ICrypt cryptoProvider = new AesCrypt();
         private static ICrypt cryptoProvider = new MachineCrypt();
 
         static void Main(string[] args)
