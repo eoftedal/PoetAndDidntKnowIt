@@ -1,3 +1,6 @@
-*.user 
-obj 
-bin 
+*.user
+obj
+bin
+*.suo
+*.user
+

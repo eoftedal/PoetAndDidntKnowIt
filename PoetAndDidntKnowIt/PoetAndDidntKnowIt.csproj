@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpEncode.cs" />
+    <Compile Include="AesCrypt.cs" />
+    <Compile Include="ICrypt.cs" />
     <Compile Include="MachineCrypt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
