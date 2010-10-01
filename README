@@ -1,0 +1,5 @@
+My exploratory code to test padding oracle attacks. This may not be the most efficient implementation requestwise, but it seems to work.
+
+Can run using MachineKey or using Aes directly by changing a variable in Program.cs
+
+Much faster if you run it directly instead of through Visual Studio.
