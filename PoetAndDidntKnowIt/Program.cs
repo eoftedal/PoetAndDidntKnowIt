@@ -81,9 +81,9 @@ namespace PoetAndDidntKnowIt
             var result = new byte[block.Length];
             for (var i = 1; i <= block.Length; i++)
             {
-                var r = newIv[newIv.Length - i];
-                byte lastByte = 0;
                 int curByte = newIv.Length - i;
+                var r = newIv[curByte];
+                int lastByte = -1;
                 for (var j = 255; j >= 0; j--)
                 {
                     newIv[curByte] = (byte)(r ^ j);
@@ -94,6 +94,7 @@ namespace PoetAndDidntKnowIt
                         break;
                     }
                 }
+                if (lastByte == -1) throw new Exception("Could not decrypt this blocK");
                 result[curByte] = (byte)lastByte;
                 for (var k = 1; k <= i; k++)
                 {
